@@ -237,6 +237,7 @@ class PlayerViewModel : ViewModel() {
     var showNowPlaying by mutableStateOf(false)
     var showSettings by mutableStateOf(false)
     var showCustomPlaylists by mutableStateOf(false)
+    var showEqualizer by mutableStateOf(false)
 
     /** Custom share playlist picking. In select mode a tap on a track row highlights it instead of playing. */
     var selectMode by mutableStateOf(false)
@@ -1198,6 +1199,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         AppPrefs.init(this)
+        com.akira.simpleplayer.playback.EqStore.init(this)
 
         setContent {
             PlayerRoot()
@@ -1456,6 +1458,12 @@ fun PlayerApp(
 
         NowPlayingHost(vm, sheet)
 
+        if (vm.showEqualizer) {
+            EqualizerScreen {
+                vm.showEqualizer = false
+            }
+        }
+
         if (vm.showSettings) {
             AlertDialog(
                 onDismissRequest = {
@@ -1487,7 +1495,7 @@ fun PlayerApp(
                         },
                         placeholder = {
                             Text(
-                                "http://伺服器:8788",
+                                "http://伺服器:55555",
                                 color = appMuted()
                             )
                         },
@@ -1503,6 +1511,19 @@ fun PlayerApp(
                                 cursorColor = appText()
                             )
                     )
+
+                    OutlinedButton(
+                        onClick = {
+                            vm.showSettings = false
+                            vm.showEqualizer = true
+                        },
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(
+                            "等化器",
+                            color = appText()
+                        )
+                    }
 
                     UpdateSection(vm)
                     }
@@ -1816,7 +1837,7 @@ fun SetupCard(
         )
 
         Text(
-            "輸入 API 伺服器位址:8788",
+            "輸入 API 伺服器位址:55555",
             color = appMuted(),
             style =
                 MaterialTheme.typography.bodyMedium
@@ -1843,7 +1864,7 @@ fun SetupCard(
             },
             placeholder = {
                 Text(
-                    "http://伺服器:8788",
+                    "http://伺服器:55555",
                     color = appMuted()
                 )
             },

@@ -23,6 +23,8 @@ import com.akira.simpleplayer.MainActivity
  *       ↓
  *   ExoPlayer decoder
  *       ↓
+ *   EqualizerAudioProcessor (parametric EQ, settings from EqStore)
+ *       ↓
  *   SpectrumAudioProcessor
  *       ├── PCM copy → SpectrumEngine → FFT → UI
  *       │
@@ -38,9 +40,13 @@ class PlaybackService : MediaSessionService() {
 
     private lateinit var spectrumEngine: SpectrumEngine
     private lateinit var spectrumProcessor: SpectrumAudioProcessor
+    private val equalizerProcessor = EqualizerAudioProcessor()
 
     override fun onCreate() {
         super.onCreate()
+
+        // The service can start without the activity (media buttons, resumption).
+        EqStore.init(this)
 
         // Same process as the UI: share one engine so the UI sees this PCM.
         spectrumEngine =
@@ -83,6 +89,7 @@ class PlaybackService : MediaSessionService() {
                         )
                         .setAudioProcessors(
                             arrayOf(
+                                equalizerProcessor,
                                 spectrumProcessor
                             )
                         )

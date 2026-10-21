@@ -16,6 +16,7 @@ Simple Player 的 Android Client。
 * 本地 Metadata Cache
 * 背景播放
 * 音訊頻譜顯示
+* 參數等化器（最多 10 段，可匯入 Poweramp / AutoEq 預設）
 * 歌曲 / 播放清單分享連結與下載
 * App 內檢查更新（GitHub Releases）
 * 與 Simple Player Web Server 整合
