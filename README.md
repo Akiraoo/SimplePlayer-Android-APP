@@ -1,5 +1,17 @@
 # Simple Player Android
 
+> [!IMPORTANT]
+> **本專案已停止維護，由 [Resona](https://github.com/Akiraoo/SimplePlayer-Resona) 接替。**
+>
+> Resona 是 Simple Player Android 的後繼專案，以 Rust 核心重新打造，功能更完整。它沿用相同的 Application ID 與簽章，可以直接覆蓋安裝在本 App 上，伺服器位址、封面快取與等化器設定都會保留。
+>
+> * 已安裝本 App：打開「應用程式更新」即可直接升級到 Resona（[v1.5.0](https://github.com/Akiraoo/SimplePlayer-android-app/releases/tag/v1.5.0)）。
+> * 新安裝：請至 [Resona Releases](https://github.com/Akiraoo/SimplePlayer-Resona/releases) 下載。
+>
+> 本 Repository 已封存（唯讀），以下內容保留作為紀錄。
+
+---
+
 Simple Player 的 Android Client。
 
 使用 Jetpack Compose 建立介面，並透過 Simple Player Server 的 Mobile API 取得音樂資料與播放內容。
